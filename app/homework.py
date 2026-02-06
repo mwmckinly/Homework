@@ -1,7 +1,7 @@
 import json
 from dataclasses import dataclass
 from typing import Literal, Dict, Any
-from app import converter
+from app import latexifier
 
 
 @dataclass
@@ -28,10 +28,6 @@ class Homework:
    
    def __repr__(self) -> str:
       return super().__repr__()
-
-   def latexify(self, style="textstyle"):
-      latex = converter.into_latex(self.html)
-      return converter.format_math(latex, style=style)
 
 HomeworkType = Literal['problem', 'example', 'reference', 'answer']
 FolderData = Dict[int, Homework]

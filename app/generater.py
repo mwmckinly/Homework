@@ -4,7 +4,8 @@ import json
 from app.homework import Homework, HomeworkType, Section
 import subprocess
 from bs4 import BeautifulSoup
-from app import converter
+
+from app.latexifier import Latexifier
 
 TEMPLATE = r"""
 \documentclass{article}
@@ -49,6 +50,7 @@ class Generator:
    problems: Dict[str, Homework]
    answers: Dict[str, str]
    references: Dict[int, str]
+   hw_types: Dict[str, str]
 
    reading: Path
    writing: Path
@@ -81,6 +83,7 @@ class Generator:
       problems: Dict[str, Homework] = {}
       answers: Dict[str, str] = {}
       references: Dict[int, str] = {}
+      hw_types: Dict[str, str] = {}
 
       for name, section in self.sections.items():
          folders = self.selection[name]
@@ -93,6 +96,10 @@ class Generator:
 
                label = f"{name}.{num}"
                problems[label] = item
+               hw_types[label] = {
+                  'example': 'Ex. ',
+                  'problem': 'Pr. '
+               }[folder] or ''
 
                if item.refr is not None: 
                   refr = section.search_in('reference', item.refr)
@@ -105,17 +112,20 @@ class Generator:
                if ans is not None:
                   answers[label] = ans
 
-
+      self.hw_types = hw_types
       self.problems = problems
       self.references = references
       self.answers = answers
 
    def write_latex(self) -> str:
       sects = list(self.selection.keys())
-      title = f"Homework {sects[0]}-{sects[-1]}"
+      title = f"{sects[0]}-{sects[-1]}"
 
-      contents = [TEMPLATE.replace("Homework Template", title)]
+      contents = [TEMPLATE.replace("Template", title)]
       refers = set()
+
+      latexifier = Latexifier(style='displaystyle')
+      
 
       for label, item in self.problems.items():
          block = [
@@ -128,9 +138,13 @@ class Generator:
          if item.refr is not None and item.refr not in refers:
             refers.add(item.refr)
             refer = self.references[item.refr]
-            block[1] += converter.into_latex(refer) + r'\\\\' '\n'
+            block[1] += latexifier.latexify(refer) + r'\\\\' '\n'
+            # block[1] += converter.into_latex(refer) + r'\\\\' '\n'
 
-         block[1] += r"\textbf{" + label + r'.}\quad ' + item.latexify('displaystyle')
+         label = self.hw_types[label] + label
+
+         # block[1] += r"\textbf{" + label + r'.}\quad ' + item.latexify('displaystyle')
+         block[1] += r"\textbf{" + label + r'.}\quad ' + latexifier.latexify(item.html)
 
          contents.append('\n'.join(block))
 
@@ -143,12 +157,12 @@ class Generator:
       ]))
 
       for label, item in self.answers.items():
-         latex = converter.into_latex(item)
+         latex = latexifier.latexify(item)
+         label = self.hw_types[label] + label
 
          contents.append(
             "\n".join([
                r"\noindent\textbf{" + label + r".}",
-               r"\par",
                latex,
                r"\vspace{1em}"
             ])

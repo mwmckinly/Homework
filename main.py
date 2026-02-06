@@ -5,10 +5,9 @@ from typing import Dict
 
 TEXTBOOK = "app/data/textbook.html"
 ANSWERS = "app/data/answers.html"
+DATABASE = "app/data/problems.json"
 
-PROBLEMS_JSON = "app/data/problems.json"
-
-PDF = "app/out/homework.pdf"
+OUTPUT_PDF = "app/out/homework.pdf"
 
 """
 Section 1.5 (Mixture problems):33,37
@@ -30,6 +29,5 @@ SELECTED: Dict[str, HWSelection] = {
 if __name__ == "__main__":
    # Extrator([TEXTBOOK, ANSWERS], PROBLEMS_JSON).extract_homework()
 
-   gen = Generator(PROBLEMS_JSON, PDF, SELECTED)
-
+   gen = Generator(DATABASE, OUTPUT_PDF, SELECTED)
    gen.generate_pdf()
