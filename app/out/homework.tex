@@ -5,6 +5,7 @@
 \usepackage{textcomp}
 \usepackage{fontspec}
 \usepackage{unicode-math}
+\everymath{\displaystyle\scriptstyle}
 \usepackage{cprotect}
 \setmainfont{Latin Modern Roman}
 \setmathfont{Latin Modern Math}
@@ -13,6 +14,9 @@
 
 \usepackage{amsmath}
 
+\relpenalty=10000
+\binoppenalty=10000
+
 \setlength{\parindent}{0pt}
 
 \begin{document}
@@ -20,271 +24,294 @@
 \newlength{\partheight}
 \setlength{\partheight}{0.2375\textheight}
 
-\begin{minipage}[t][0.05\textheight]{\textwidth}
+\begin{minipage}[t]{\textwidth}
 \centering
-{\Large \textbf{Homework Template}}
+{\Large \textbf{Homework 1.5-2.3}}
 \end{minipage}
 
-
 \begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.4.1}\;\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F0D1}{}}%
-Problems 54 through 64 illustrate the application of Torricelli's law.
-
-\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F0D4}{}}%
-A tank is shaped like a vertical cylinder; it initially contains water
-to a depth of 9 ft, and a bottom plug is removed at time {\(t = 0\)}
-(hours). After 1 h the depth of the water has dropped to 4 ft. How long
-does it take for all the water to drain from the tank?
-
-\end{minipage}
-\par
-\begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.4.7}\;\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F0D1}{}}%
-Problems 54 through 64 illustrate the application of Torricelli's law.
-
-\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F0E0}{}}%
-A cylindrical tank with length 5 ft and radius 3 ft is situated with its
-axis horizontal. If a circular bottom hole with a radius of 1 in. is
-opened and the tank is initially half full of water, how long will it
-take for the liquid to drain completely?
-
-\end{minipage}
-\par
-\begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.4.22}\;\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F08D}{}}%
-Problems 29 through 32 explore the connections among general and
-singular solutions, existence, and uniqueness.
-
-\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F0BA}{}}%
-{Pollution increase} The amount \texttt{A}(\texttt{t}) of atmospheric
-pollutants in a certain mountain valley grows naturally and is tripling
-every 7.5 years.
-
-\begin{enumerate}
-\item
-  \leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F0BD}{}}%
-  If the initial amount is 10 pu (pollutant units), write a formula for
-  \texttt{A}(\texttt{t}) giving the amount (in pu) present after
-  \texttt{t} years.
-\item
-  \leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F0BF}{}}%
-  What will be the amount (in pu) of pollutants present in the valley
-  atmosphere after 5 years?
-\item
-  \leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F0C1}{}}%
-  If it will be dangerous to stay in the valley when the amount of
-  pollutants reaches 100 pu, how long will this take?
-\end{enumerate}
-
-\end{minipage}
-\par
-\begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.4.24}\;\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F08D}{}}%
-Problems 29 through 32 explore the connections among general and
-singular solutions, existence, and uniqueness.
-
-\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F0CC}{}}%
-{Growth of languages} There are now about 3300 different human
-``language families'' in the whole world. Assume that all these are
-derived from a single original language and that a language family
-develops into 1.5 language families every 6 thousand years. About how
-long ago was the single original human language spoken?
-
-\end{minipage}
-\par
-\begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.5.3}\;\hypertarget{P700101346200000000000000000F1B7}{}
-\hypertarget{P700101346200000000000000000F1B8}{%
-\section{\texorpdfstring{{Solution}}{Solution}}}
-
-Division by {\(x^{2}\)} gives the linear first-order equation
-
-\hypertarget{P700101346200000000000000000F1BA}{}
-\[\frac{dy}{dx}\text{~+~}\frac{1}{x}\text{~y~=~}\frac{\sin\ x}{x^{2}}\]
-
-with {\(P(x) = 1/x\)} and {\(Q(x) = (\sin\ x)/x^{2}\)}. With
-{\(x_{0} = 1\)} the integrating factor in
-\protect\hyperlink{P7001013462000000000000000001CE1}{{(12)}} is
-
-\hypertarget{P700101346200000000000000000F1BC}{}
-\[\rho(x) = \exp\left( {\int_{1}^{x}{\frac{1}{t}dt}} \right) = \exp(\ln\ x) = x,\]
-
-so the desired particular solution is given by
-
-\hypertarget{P7001013462000000000000000001CEE}{}
-{(14)}{\[y(x) = \frac{1}{x}\left\lbrack {y_{0} + {\int_{1}^{x}\frac{\sin\ t}{t}}\ dt} \right\rbrack.\]}
-
-In accord with
-\protect Theorem 1,
-this solution is defined on the whole positive \texttt{x}-axis.
-
-\hypertarget{P7001013462000000000000000001CE3}{}
-Solve the initial value problem
-
-\hypertarget{P7001013462000000000000000001CE6}{}
-{(13)}{\(x^{2}\frac{dy}{dx} + xy = \sin\ x,\mspace{25mu} y(1) = y_{0}.\)}
-
-\end{minipage}
-\par
-\begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.5.5}\;\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F253}{}}%
 Problems 33 through 37 illustrate the application of linear first-order
 differential equations to mixture problems.
+\\\\
+\textbf{1.5.33.}\quad A tank contains 1000 liters (L) of a solution consisting of 100 kg of
+salt dissolved in water. Pure water is pumped into the tank at the rate
+of 5 L/s, and the mixture---kept uniform by stirring---is pumped out at
+the same rate. How long will it be until only 10 kg of salt remains in
+the tank?
 
-\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F25E}{}}%
-A 400-gal tank initially contains 100~gal of brine containing 50~lb of
-salt. Brine containing 1~lb of salt per gallon enters the tank at the
-rate of 5~gal/s, and the well-mixed brine in the tank flows out at the
-rate of 3~gal/s. How much salt will the tank contain when it is full of
+\end{minipage}
+\par
+\begin{minipage}[t][\partheight]{\textwidth}
+\textbf{1.5.37.}\quad A 400-gal tank initially contains 100 gal of brine containing 50 lb of
+salt. Brine containing 1 lb of salt per gallon enters the tank at the
+rate of 5 gal/s, and the well-mixed brine in the tank flows out at the
+rate of 3 gal/s. How much salt will the tank contain when it is full of
 brine?
 
 \end{minipage}
 \par
 \begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.5.7}\;\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F253}{}}%
-Problems 33 through 37 illustrate the application of linear first-order
-differential equations to mixture problems.
-
-\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F269}{}}%
-{Two tanks} Suppose that in the cascade shown in
-\protect Fig. 1.5.5,
-tank 1 initially contains 100~gal of pure ethanol and tank 2 initially
-contains 100~gal of pure water. Pure water flows into tank 1 at
-10~gal/min, and the other two flow rates are also
-10~gal/min.\textbf{(a)} Find the amounts \texttt{x}(\texttt{t}) and
-\texttt{y}(\texttt{t}) of ethanol in the two tanks at time
-{\(t \geqq 0.\)} \textbf{(b)} Find the maximum amount of ethanol ever in
-tank 2.
+Separate variables and use partial fractions to solve the initial value
+problems in Problems 1--8. Use either the exact solution or a
+computer-generated slope field to sketch the graphs of several solutions
+of the given differential equation, and highlight the indicated
+particular solution.
+\\\\
+\textbf{2.1.3.}\quad {$\displaystyle \frac{dx}{dt} = 1 - x^{2},x(0) = 3$}
 
 \end{minipage}
 \par
 \begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.5.16}\;\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F202}{}}%
-Find general solutions of the differential equations in Problems 1
-through 25. If an initial condition is given, find the corresponding
-particular solution. Throughout, primes denote derivatives with respect
-to \texttt{x}.
-
-\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F223}{}}%
-{\(y\text{'} = (1 - y)\ \cos\ x\)}, {\(y(\pi) = 2\)}
+\textbf{2.1.5.}\quad {$\displaystyle \frac{dx}{dt} = 3x(5 - x),x(0) = 8$}
 
 \end{minipage}
 \par
 \begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.5.23}\;\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F202}{}}%
-Find general solutions of the differential equations in Problems 1
-through 25. If an initial condition is given, find the corresponding
-particular solution. Throughout, primes denote derivatives with respect
-to \texttt{x}.
-
-\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F231}{}}%
-{\(xy\text{'} + (2x - 3)y = 4x^{4}\)}
+\textbf{2.1.12.}\quad {Population growth} The time rate of change of an alligator population
+\texttt{P} in a swamp is proportional to the square of \texttt{P}. The
+swamp contained a dozen alligators in 1988, two dozen in 1998. When will
+there be four dozen alligators in the swamp? What happens thereafter?
 
 \end{minipage}
 \par
 \begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.5.24}\;\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F202}{}}%
-Find general solutions of the differential equations in Problems 1
-through 25. If an initial condition is given, find the corresponding
-particular solution. Throughout, primes denote derivatives with respect
-to \texttt{x}.
+\textbf{2.1.13.}\quad {Birth rate exceeds death rate} Consider a prolific breed of rabbits
+whose birth and death rates, {$\displaystyle \beta$} and {$\displaystyle \delta\text{,}$} are
+each proportional to the rabbit population {$\displaystyle P = P(t)\text{,}$} with
+{$\displaystyle \beta > \delta\text{.}$}
 
-\leavevmode\vadjust pre{\hypertarget{P700101346200000000000000000F233}{}}%
-{\((x^{2} + 4)y\text{'} + 3xy = x\)}, {\(y(0) = 1\)}
+\hspace*{1.5em}\textbf{(a)} Show that $\displaystyle P(t) = \frac{P_{0}}{1 - kP_{0}t}, k\text{constant}\text{.}$ Note that {$\displaystyle \left. P(t)\rightarrow + \infty \right.$} as
+{$\displaystyle \left. t\rightarrow 1/\left( kP_{0} \right)\text{.} \right.$} This
+is doomsday.
 
-\end{minipage}
-\par
-\begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.5.1}\;\hypertarget{P700101346200000000000000000F177}{}
-\hypertarget{P700101346200000000000000000F178}{%
-\section{\texorpdfstring{{Solution}}{Solution}}}
-
-Here we have {\(P(x) \equiv - 1\)} and
-{\(Q(x) = \frac{11}{8}e^{- x/3}\)}, so the integrating factor is
-
-\hypertarget{P700101346200000000000000000F17A}{}
-\[\rho(x) = e^{\int( - 1)dx} = e^{- x}.\]
-
-Multiplication of both sides of the given equation by {\(e^{- x}\)}
-yields
-
-\hypertarget{P7001013462000000000000000001C9D}{}
-{(7)}{\[e^{- x}\frac{dy}{dx} - e^{- x}y = \frac{11}{8}e^{- 4x/3},\]}
-
-which we recognize as
-
-\hypertarget{P700101346200000000000000000F17D}{}
-\[\frac{d}{dx}(e^{- x}y) = \frac{11}{8}e^{- 4x/3}.\]
-
-Hence integration with respect to \texttt{x} gives
-
-\hypertarget{P700101346200000000000000000F17F}{}
-\[e^{- x}y = {\int\frac{11}{8}}e^{- 4x/3}dx = - \frac{33}{32}e^{- 4x/3} + C,\]
-
-and multiplication by {\(e^{x}\)} gives the general solution
-
-\hypertarget{P7001013462000000000000000001CA3}{}
-{(8)}{\[y(x) = Ce^{x} - \frac{33}{32}e^{- x/3}.\]}
-
-Substitution of {\(x = 0\)} and {\(y = - 1\)} now gives
-{\(C = \frac{1}{32},\)} so the desired particular solution is
-
-\hypertarget{P700101346200000000000000000F182}{}
-\[y(x) = \frac{1}{32}e^{x} - \frac{33}{32}e^{- x/3} = \frac{1}{32}(e^{x} - 33e^{- x/3}).\]
-
-\hypertarget{P7001013462000000000000000001C94}{}
-Solve the initial value problem
-
-\hypertarget{P700101346200000000000000000F176}{}
-\(\frac{dy}{dx} - y = \frac{11}{8}e^{- x/3},\mspace{25mu} y(0) = \  - 1.\)
+\hspace*{1.5em}\textbf{(b)} Suppose that {$\displaystyle P_{0} = 6$} and that there
+are nine rabbits after ten months. When does doomsday occur?
 
 \end{minipage}
 \par
 \begin{minipage}[t][\partheight]{\textwidth}
-\textbf{1.5.2}\;\hypertarget{P700101346200000000000000000F18D}{}
-\hypertarget{P700101346200000000000000000F18E}{%
-\section{\texorpdfstring{{Solution}}{Solution}}}
-
-After division of both sides of the equation by {\(x^{2} + 1\)}, we
-recognize the result
-
-\hypertarget{P700101346200000000000000000F190}{}
-\[\frac{dy}{dx} + \frac{3x}{x^{2} + 1}\ y\  = \frac{6x}{x^{2} + 1}\]
-
-as a first-order linear equation with {\(P(x) = 3x/(x^{2} + 1)\)} and
-{\(Q(x) = 6x/(x^{2} + 1)\)}. Multiplication by
-
-\hypertarget{P700101346200000000000000000F192}{}
-\[\rho(x) = \exp\ \left( {\int{\frac{3x}{x2 + 1}dx}} \right) = \exp\left( {\frac{3}{2}\ln(x^{2} + 1)} \right) = {(x^{2} + 1)}^{3/2}\]
-
-yields
-
-\hypertarget{P700101346200000000000000000F194}{}
-\[{(x^{2} + 1)}^{3/2}\frac{dy}{dx} + 3x{(x^{2} + 1)}^{1/2}y = 6x{(x^{2} + 1)}^{1/2},\]
-
-and thus
-
-\hypertarget{P700101346200000000000000000F196}{}
-\[D_{x}\left\lbrack {(x^{2} + 1)}^{3/2}y \right\rbrack = 6x{(x^{2} + 1)}^{1/2}.\]
-
-Integration then yields
-
-\hypertarget{P700101346200000000000000000F198}{}
-\[{(x^{2} + 1)}^{3/2}y = {\int{6x{(x^{2} + 1)}^{1/2}}}dx = 2{(x^{2} + 1)}^{3/2} + C.\]
-
-Multiplication of both sides by {\({(x^{2} + 1)}^{- 3/2}\)} gives the
-general solution
-
-\hypertarget{P7001013462000000000000000001CC1}{}
-{(10)}{\[y(x) = 2 + C{(x^{2} + 1)}^{- 3/2}.\]}
-
-\hypertarget{P7001013462000000000000000001CAF}{}
-Find a general solution of
-
-\hypertarget{P7001013462000000000000000001CB3}{}
-{(9)}{\((x^{2} + 1)\frac{dy}{dx} + 3xy = 6x.\)}
+\textbf{2.1.26.}\quad {Constant death rate} A population \texttt{P}(\texttt{t}) of small
+rodents has birth rate {$\displaystyle \beta = (0.001)P$} (births per month per
+rodent) and \emph{constant} death rate {$\displaystyle \delta\text{.}$} If
+{$\displaystyle P(0) = 100$} and {$\displaystyle P\text{'}(0) = 8\text{,}$} how long (in months)
+will it take this population to double to 200 rodents?
+(\emph{Suggestion:} First find the value of {$\displaystyle \delta$}.)
 
 \end{minipage}
 \par
+\begin{minipage}[t][\partheight]{\textwidth}
+\textbf{2.1.27.}\quad {Constant death rate} Consider an animal population
+\texttt{P}(\texttt{t}) with constant death rate {$\displaystyle \delta = 0.01$}
+(deaths per animal per month) and with birth rate {$\displaystyle \beta$}
+proportional to \texttt{P}. Suppose that {$\displaystyle P(0) = 200$} and
+{$\displaystyle P\text{'}(0) = 2\text{.}$}
+
+\hspace*{1.5em}\textbf{(a)} When is
+{$\displaystyle P = 1000\text{?}$}
+
+\hspace*{1.5em}\textbf{(b)} When does doomsday occur?
+
+\end{minipage}
+\par
+\begin{minipage}[t][\partheight]{\textwidth}
+In Problems 1 through 12 first solve the equation {\(f(x) = 0\)} to find
+the critical points of the given autonomous differential equation
+{\(dx/dt = f(x)\text{.}\)} Then analyze the sign of
+\texttt{f}(\texttt{x}) to determine whether each critical point is
+stable or unstable, and construct the corresponding phase diagram for
+the differential equation. Next, solve the differential equation
+explicitly for \texttt{x}(\texttt{t}) in terms of \texttt{t}. Finally,
+use either the exact solution or a computer-generated slope field to
+sketch typical solution curves for the given differential equation, and
+verify visually the stability of each critical point.
+\\\\
+\textbf{2.2.1.}\quad {$\displaystyle \frac{dx}{dt} = x - 4$}
+
+\end{minipage}
+\par
+\begin{minipage}[t][\partheight]{\textwidth}
+\textbf{2.2.3.}\quad {}{$\displaystyle \frac{dx}{dt} = x^{2} - 4x$}
+
+\end{minipage}
+\par
+\begin{minipage}[t][\partheight]{\textwidth}
+\textbf{2.2.7.}\quad {$\displaystyle \frac{dx}{dt} = (x - 2)^{2}$}
+
+\end{minipage}
+\par
+\begin{minipage}[t][\partheight]{\textwidth}
+\textbf{2.2.26.}\quad If {$\displaystyle 4h = kM^{2}\text{,}$} show that typical solution curves look as
+illustrated in . Thus if {$\displaystyle x_{0} \geqq M/2\text{,}$} then
+{$\displaystyle \left. x(t)\rightarrow M/2 \right.$} as
+{$\displaystyle \left. t\rightarrow + \infty\text{.} \right.$} But if
+{$\displaystyle x_{0} < M/2\text{,}$} then {$\displaystyle x(t) = 0$} after a finite period of
+time, so the lake is fished out. The critical point {$\displaystyle x = M/2$} might
+be called \emph{semistable}, because it looks stable from one side,
+unstable from the other. 
+\end{minipage}
+\par
+\begin{minipage}[t][\partheight]{\textwidth}
+\textbf{2.2.27.}\quad If {$\displaystyle 4h > kM^{2}\text{,}$} show that {$\displaystyle x(t) = 0$} after a finite
+period of time, so the lake is fished out (whatever the initial
+population). {[}\emph{Suggestion:} Complete the square to rewrite the
+differential equation in the form
+{$\displaystyle dx/dt = - k\left\lbrack (x - a)^{2} + b^{2} \right\rbrack\text{.}$}
+{}Then solve explicitly by separation of variables.{]} The results of
+this and the previous problem (together with ) show that
+{$\displaystyle h = \frac{1}{4}kM^{2}$} is a critical harvesting rate for a logistic
+population. At any lesser harvesting rate the population approaches a
+limiting population \texttt{N} that is less than \texttt{M} (why?),
+whereas at any greater harvesting rate the population reaches
+extinction.
+
+\end{minipage}
+\par
+\begin{minipage}[t][\partheight]{\textwidth}
+\textbf{2.3.1.}\quad {No air resistance} Suppose that a crossbow bolt is shot straight upward
+from the ground ({$\displaystyle y_{0} = 0$}) with initial velocity {$\displaystyle v_{0} = 49$}
+(m/s). Then with {$\displaystyle g = 9.8$} gives $\displaystyle \frac{dv}{dt} = - 9.8,\text{so} v(t) = - (9.8)t + v_{0} = - (9.8)t + 49.$ Hence the bolt's height function \texttt{y}(\texttt{t}) is given by $\displaystyle y(t) = {\int{\left\lbrack - (9.8)t + 49 \right\rbrack dt = - (4.9)t^{2} + 49t + y_{0} = - (4.9)t^{2} + 49t\text{.}}}$ The bolt reaches its maximum height when
+{$\displaystyle v = - (9.8)t + 49 = 0\text{,}$} hence when {$\displaystyle t = 5$} (s). Thus its
+maximum height is $\displaystyle y_{\max} = y(5) = - (4.9)\left( 5^{2} \right) + (49)(5) = 122.5\left( \text{m} \right)\text{.}$ The bolt returns to the ground when
+{$\displaystyle y = - (4.9)t(t - 10) = 0\text{,}$} and thus after 10 seconds aloft.
+
+\end{minipage}
+\par
+\begin{minipage}[t][\partheight]{\textwidth}
+\textbf{2.3.2.}\quad {Velocity-proportional resistance} We again consider a bolt shot
+straight upward with initial velocity {$\displaystyle v_{0} = 49\text{m/s}$} from a
+crossbow at ground level. But now we take air resistance into account,
+with {$\displaystyle \rho = 0.04$} in . We ask how the resulting maximum height and
+time aloft compare with the values found in .
+
+\end{minipage}
+\par
+\begin{minipage}[t][\partheight]{\textwidth}
+Problems 9 through 12 illustrate resistance proportional to the
+velocity.
+\\\\
+\textbf{2.3.7.}\quad Suppose that a car starts from rest, its engine providing an
+acceleration of {$\displaystyle 10\text{ft/s}^{2}\text{,}$} while air resistance
+provides {$\displaystyle 0.1\text{ft/s}^{2}$} of deceleration for each foot per
+second of the car's velocity.
+
+\hspace*{1.5em}\textbf{(a)} Find the car's maximum
+possible (limiting) velocity.
+
+\hspace*{1.5em}\textbf{(b)} Find how long it takes the
+car to attain 90\% of its limiting velocity, and how far it travels
+while doing so.
+
+\end{minipage}
+\par
+\begin{minipage}[t][\partheight]{\textwidth}
+Problems 17 and 18 apply -- to the motion of a crossbow bolt.
+\\\\
+\textbf{2.3.9.}\quad A motorboat weighs 32,000 lb and its motor provides a thrust of 5000 lb.
+Assume that the water resistance is 100 pounds for each foot per second
+of the speed \texttt{v} of the boat. Then $\displaystyle 1000\frac{dv}{dt} = 5000 - 100v.$ If the boat starts from rest, what is the maximum velocity that it can
+attain?
+
+\end{minipage}
+\par
+\newpage
+\begin{center}
+{\Large \textbf{Answer Key}}
+\end{center}
+\vspace{1em}
+\noindent\textbf{1.5.33.}
+\par
+\textbf{} After about 7 min 41 s
+
+\vspace{1em}
+\noindent\textbf{1.5.37.}
+\par
+\textbf{} 393:75 lb
+
+\vspace{1em}
+\noindent\textbf{2.1.3.}
+\par
+\textbf{} {\(x(t) = \frac{2 + e^{- 2t}}{2 - e^{- 2t}}\)}
+
+\vspace{1em}
+\noindent\textbf{2.1.5.}
+\par
+\textbf{} {\(x(t) = \frac{40}{8 - 3e^{- 15t}}\)}
+
+\vspace{1em}
+\noindent\textbf{2.1.12.}
+\par
+\textbf{} {\(P(t) = \frac{240}{20 - t}\)}
+
+\vspace{1em}
+\noindent\textbf{2.1.13.}
+\par
+\textbf{} {\(P(t) = \frac{180}{30 - t}\)}
+
+\vspace{1em}
+\noindent\textbf{2.1.26.}
+\par
+\textbf{} {\(50\ln\frac{9}{8} \approx 15.89\text{months}\)}
+
+\vspace{1em}
+\noindent\textbf{2.1.27.}
+\par
+\textbf{} (a) {\(100\ln\frac{9}{5} \approx 58.78\text{months}\)}\;;\;\;  (b)
+{\(100\ln 2 \approx 69.31\text{months}\)}.
+
+\vspace{1em}
+\noindent\textbf{2.2.1.}
+\par
+\textbf{} Unstable critical point: {\(x = 4\;;\;\; \)} {\(x(t) = 4 + \left( x_{0} - 4 \right)e^{t}\)}
+
+\vspace{1em}
+\noindent\textbf{2.2.3.}
+\par
+\textbf{} Stable critical point: {\(x = 0\;;\;\; \)} unstable critical point:
+{\(x = 4\;;\;\; \)} {\(x(t) = \frac{4x_{0}}{x_{0} + \left( {4 - x_{0}} \right)e^{4t}}\)}
+
+\vspace{1em}
+\noindent\textbf{2.2.7.}
+\par
+{}\textbf{} Semi-stable (see ) critical point: {\(x = 2\;;\;\; \)} {\(x(t) = \frac{\left( {2t - 1} \right)x_{0} - 4t}{tx_{0} - 2t - 1}\)}
+
+\vspace{1em}
+\noindent\textbf{2.3.2.}
+\par
+\hypertarget{solution}{%
+\section{\texorpdfstring{{Solution}}{Solution}}} We substitute {\(y_{0} = 0,v_{0} = 49\text{,}\)} and
+{\(v_{\tau} = - g/\rho = - 245\)} in and , and obtain \(\begin{matrix}
+{v(t)} & = & {294e^{- t/25} - 245,} \\
+{y(t)} & = & {7350 - 245t - 7350e^{- t/25}.}
+\end{matrix}\) To find the time required for the bolt to reach its maximum height (when
+{\(v = 0\)}), we solve the equation \(v(t) = 294e^{- t/25} - 245 = 0\) for {\(t_{m} = 25\ln(294/245) \approx 4.558\)} (s). Its maximum height
+is then {\(y_{\text{max}} = v\left( t_{m} \right) \approx 108.280\)}
+meters (as opposed to 122.5 meters without air resistance). To find when
+the bolt strikes the ground, we must solve the equation \(y(t) = 7350 - 245t - 7350e^{- t/25} = 0.\) {}Using Newton's method, we can begin with the initial guess
+{\(t_{0} = 10\)} and carry out the iteration
+{\(t_{n + 1} = t_{n} - y\left( t_{n} \right)/y\text{'}\left( t_{n} \right)\)}
+to generate successive approximations to the root. Or we can simply use
+the \texttt{Solve} command on a calculator or computer. We find that the
+bolt is in the air for {\(t_{\text{f}} \approx 9.411\)} seconds (as
+opposed to 10 seconds without air resistance). It hits the ground with a
+reduced speed of
+{\(\left| v\left( t_{\text{f}} \right) \middle| \approx 43.227\text{m/s} \right.\)}
+(as opposed to its initial velocity of 49 m/s). Thus the effect of air resistance is to decrease the bolt's maximum
+height, the total time spent aloft, and its final impact speed. Note
+also that the bolt now spends more time in descent
+({\(t_{\text{f}} - t_{m} \approx 4.853\)} s) than in ascent
+({\(t_{m} \approx 4.558\)} s).
+
+\vspace{1em}
+\noindent\textbf{2.3.7.}
+\par
+\textbf{} (a) 100 ft/sec\;;\;\;  (b) about 23 sec and 1403 ft to reach 90
+ft/sec
+
+\vspace{1em}
+\noindent\textbf{2.3.9.}
+\par
+\textbf{} 50 ft/s
+
+\vspace{1em}
 
 \end{document}
