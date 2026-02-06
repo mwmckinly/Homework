@@ -1,37 +1,41 @@
 from typing import List, Dict
 from pathlib import Path
 import json
-from app.homework import Homework, FolderData, HomeworkType, Section
-import subprocess, tempfile, os, shutil
+from app.homework import Homework, HomeworkType, Section
+import subprocess
 from bs4 import BeautifulSoup
+from app import converter
 
-TEMPLATE = """
-\\documentclass{article}
-\\usepackage[legalpaper, margin=0.5in]{geometry}
+TEMPLATE = r"""
+\documentclass{article}
+\usepackage[legalpaper, margin=0.5in]{geometry}
 
-\\usepackage{textcomp}
-\\usepackage{fontspec}
-\\usepackage{unicode-math}
-\\usepackage{cprotect}
-\\setmainfont{Latin Modern Roman}
-\\setmathfont{Latin Modern Math}
+\usepackage{textcomp}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\everymath{\displaystyle\scriptstyle}
+\usepackage{cprotect}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
 
-\\usepackage{hyperref}
+\usepackage{hyperref}
 
-\\usepackage{amsmath}
+\usepackage{amsmath}
 
-\\setlength{\\parindent}{0pt}
+\relpenalty=10000
+\binoppenalty=10000
 
-\\begin{document}
+\setlength{\parindent}{0pt}
 
-\\newlength{\\partheight}
-\\setlength{\\partheight}{0.2375\\textheight}
+\begin{document}
 
-\\begin{minipage}[t][0.05\\textheight]{\\textwidth}
-\\centering
-{\\Large \\textbf{Homework Template}}
-\\end{minipage}
+\newlength{\partheight}
+\setlength{\partheight}{0.2375\textheight}
 
+\begin{minipage}[t]{\textwidth}
+\centering
+{\Large \textbf{Homework Template}}
+\end{minipage}
 """
 
 #: { 'examples': [1, 2, 3] }
@@ -39,10 +43,11 @@ HWSelection = Dict[HomeworkType, List[int]]
 
 
 class Generator:
-   sections: Dict[str, Section]
    selection: Dict[str, HWSelection]
 
-   lookup_table: Dict[str, Homework]
+   sections: Dict[str, Section]
+   problems: Dict[str, Homework]
+   answers: Dict[str, str]
    references: Dict[int, str]
 
    reading: Path
@@ -50,15 +55,14 @@ class Generator:
 
    answering: bool = False
 
-   def __init__(self, reading: str, writing: str, selection: Dict[str, HWSelection], answering = False) -> None:
+   def __init__(self, reading: str, writing: str, selection: Dict[str, HWSelection]) -> None:
       self.reading = Path(reading).resolve()
       self.writing = Path(writing)
       self.writing.parent.touch()
-      self.answering = answering
       self.selection = selection
 
       self.load_selected()
-      self.create_table()
+      self.establish_keymaps()
    
    def load_selected(self):
       with open(self.reading, "r", encoding='utf-8') as fp:
@@ -71,81 +75,96 @@ class Generator:
          if item in data.keys():
             selection[item] = data[item]
       
-      if not self.answering:
-         self.sections = selection
-         return
-      
-      answer_file = str(self.reading).replace('.json', '.key.json')
-      with open(answer_file, "r", encoding='utf-8') as fp:
-         answers = json.load(fp)
-         data = { str(k): Section.from_dict(v) for k, v in answers.items() }
-
-      for item in selection.keys():
-         if item in data.keys():
-            homework = data[item].answers.copy()
-            for num, hw in homework.items():
-               selection[item].append_to('answer', hw, num)
-      
       self.sections = selection
-      return
-   
-   def create_table(self):
-      lookup_table: Dict[str, Homework] = {} #: '1.1': Homework
-      references: Dict[int, str] = {} #: x: 'html-content'
+
+   def establish_keymaps(self):
+      problems: Dict[str, Homework] = {}
+      answers: Dict[str, str] = {}
+      references: Dict[int, str] = {}
 
       for name, section in self.sections.items():
          folders = self.selection[name]
+         
          for folder, numbers in folders.items():
+            solved = section.answers.get(folder, {})
             for num in numbers:
                item = section.search_in(folder, num)
                if item is None: continue
 
                label = f"{name}.{num}"
-               lookup_table[label] = item
+               problems[label] = item
 
-               if item.refr is None: continue
+               if item.refr is not None: 
+                  refr = section.search_in('reference', item.refr)
 
-               refr = section.search_in('reference', item.refr)
-
-               if refr is None: continue
-
-               references[item.refr] = refr.html
+                  if refr is not None: 
+                     references[item.refr] = refr.html               
 
 
-      self.lookup_table = lookup_table
+               ans = solved.get(num)
+               if ans is not None:
+                  answers[label] = ans
+
+
+      self.problems = problems
       self.references = references
-   
-   def generate_latex(self) -> str:
-      content = [TEMPLATE]
-      refers: set[int] = set()
+      self.answers = answers
 
-      for ident, item in self.lookup_table.items():
-         if item.refr in refers:
-            item.refr = None
+   def write_latex(self) -> str:
+      sects = list(self.selection.keys())
+      title = f"Homework {sects[0]}-{sects[-1]}"
 
-         label = f"{ident}"
-         latex = item.latexify(self.references.get(item.refr or -1))
-         
-         homework = [
+      contents = [TEMPLATE.replace("Homework Template", title)]
+      refers = set()
+
+      for label, item in self.problems.items():
+         block = [
             r"\begin{minipage}[t][\partheight]{\textwidth}",
-            r"\textbf{" + label + r'}\;' + latex,
+            r"",
             r"\end{minipage}",
             r"\par"
          ]
 
-         content.extend(homework)
+         if item.refr is not None and item.refr not in refers:
+            refers.add(item.refr)
+            refer = self.references[item.refr]
+            block[1] += converter.into_latex(refer) + r'\\\\' '\n'
 
-      content.append('\n\\end{document}')
+         block[1] += r"\textbf{" + label + r'.}\quad ' + item.latexify('displaystyle')
+
+         contents.append('\n'.join(block))
+
+      contents.append('\n'.join([
+         r"\newpage",
+         r"\begin{center}",
+         r"{\Large \textbf{Answer Key}}",
+         r"\end{center}",
+         r"\vspace{1em}"
+      ]))
+
+      for label, item in self.answers.items():
+         latex = converter.into_latex(item)
+
+         contents.append(
+            "\n".join([
+               r"\noindent\textbf{" + label + r".}",
+               r"\par",
+               latex,
+               r"\vspace{1em}"
+            ])
+         )
+         
+         
+      contents.append('\n\\end{document}')
 
       FILENAME = str(self.writing).replace('.pdf', '.tex')
-
       with open(FILENAME, "w", encoding='utf-8') as fp:
-         fp.write('\n'.join(content))
+         fp.write('\n'.join(contents))
 
       return FILENAME
-   
+
    def generate_pdf(self):
-      tex_path = Path(self.generate_latex())
+      tex_path = Path(self.write_latex())
       output_dir = self.writing.parent
 
       command = [
@@ -179,8 +198,9 @@ class Generator:
             file_path.unlink()
 
    def test(self):
-      for ident, item in self.lookup_table.items():
+      for ident, item in self.problems.items():
          print(f"{ident}: {BeautifulSoup(item.html, 'lxml').text}")
          if item.refr is None: continue
 
          print(f"{ident} -> {item.refr}: {BeautifulSoup(self.references.get(item.refr) or "", 'lxml').text}")
+

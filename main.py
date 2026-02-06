@@ -1,39 +1,35 @@
 # from src.extract import Extractor
 from app.generater import Generator, HWSelection
 from app.extractor import Extrator
-from app.homework import Section, Homework
-from typing import Dict, List
+from typing import Dict
 
 TEXTBOOK = "app/data/textbook.html"
 ANSWERS = "app/data/answers.html"
 
 PROBLEMS_JSON = "app/data/problems.json"
-ANSWERS_JSON = PROBLEMS_JSON.replace('.json', '.key.json')
 
 PDF = "app/out/homework.pdf"
 
 """
-Section 1.3: 11,13,14 (only need to determine whether existence and uniqueness of solutions is guaranteed), 28
+Section 1.5 (Mixture problems):33,37
 
-Section 1.4 (skip Toricelli's law): 1,7,21,24,27,34,51
+Section 2.1: 3,5,12,13,26,27
 
-Section 1.5 (through Example 3): 3,5,7,16,23,24
+Section 2.2 (skip Bifurcation):1,3,7,26,27
+
+Section 2.3 (through Example 2): 7, 9.    (Example 3 is dropped)
 """
 
 SELECTED: Dict[str, HWSelection] = {
-   '1.3': { 'problem': [ 11, 13, 14 ], },
-   '1.4': { 'problem': [1, 7, 22, 24, 27, 34, 51], },
-   '1.5': { 
-      'problem': [3, 5, 7, 16, 23, 24],
-      'example': [1, 2, 3]
-   }
+   '1.5': { 'problem': [33, 37] },
+   '2.1': { 'problem': [3,5,12,13,26,27] },
+   '2.2': { 'problem': [1,3,7,26,27] },
+   '2.3': { 'example': [1, 2], 'problem': [7, 9] }
 }
 
 if __name__ == "__main__":
-   Extrator(TEXTBOOK, PROBLEMS_JSON).extract_homework()
-   # Extrator(ANSWERS, ANSWERS_JSON).extract_homework()
+   # Extrator([TEXTBOOK, ANSWERS], PROBLEMS_JSON).extract_homework()
 
-   gen = Generator(PROBLEMS_JSON, PDF, SELECTED, answering=False)
+   gen = Generator(PROBLEMS_JSON, PDF, SELECTED)
 
-   gen.test()
-   
+   gen.generate_pdf()

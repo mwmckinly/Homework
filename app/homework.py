@@ -29,8 +29,9 @@ class Homework:
    def __repr__(self) -> str:
       return super().__repr__()
 
-   def latexify(self, ref_text: str | None = None):
-      return converter.latexify_homework(self.html, ref_text)
+   def latexify(self, style="textstyle"):
+      latex = converter.into_latex(self.html)
+      return converter.format_math(latex, style=style)
 
 HomeworkType = Literal['problem', 'example', 'reference', 'answer']
 FolderData = Dict[int, Homework]
@@ -40,20 +41,19 @@ class Section:
    examples: FolderData
    problems: FolderData
    references: FolderData
-   answers: FolderData
+   answers: Dict[HomeworkType, Dict[int, str]]
 
    def __init__(self) -> None:
       self.examples = {  }
       self.problems = {  }
       self.references = {  }
-      self.answers = {  }
+      self.answers = { 'problem': {}, 'example': {} }
    
    def _get_folder(self, hw_type: HomeworkType):
       folders: Dict[HomeworkType, Any] = {
          'problem': self.problems,
          'example': self.examples,
          'reference': self.references,
-         'answer': self.answers,
       }
       
       return folders[hw_type]
@@ -80,13 +80,16 @@ class Section:
          "examples": serialize_folder(self.examples),
          "problems": serialize_folder(self.problems),
          "references": serialize_folder(self.references),
-         "answers": serialize_folder(self.answers),
+         "answers": {
+            k: { str(n): v for n, v in d.items() }
+            for k, d in self.answers.items()
+         }
       }
 
       return dictionary
    
    @classmethod
-   def from_dict(cls, data: Dict[str, Dict[str, Any]]) -> 'Section':
+   def from_dict(cls, data: Any) -> 'Section':
       section = cls()
 
       def deserialize(folder: Dict[str, Any]) -> FolderData:
@@ -98,7 +101,9 @@ class Section:
       section.examples = deserialize(data.get('examples', {}))
       section.problems = deserialize(data.get('problems', {}))
       section.references = deserialize(data.get('references', {}))
-      section.answers = deserialize(data.get('answers', {}))
+      section.answers = {
+         kind: { int(k): v for k, v in answers.items() }
+         for kind, answers in data.get('answers', {}).items()
+      }
       
       return section
-
